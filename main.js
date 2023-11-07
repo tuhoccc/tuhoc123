@@ -95,6 +95,11 @@
 //     gioiTinh: "Nu",
 //   },
 // ];
+
+// const total = dongvat.reduce((tong, value) => {
+//   return tong + value.tuoi;
+// }, 0);
+// console.log("total :", total);
 //---------filter
 // const ketqua = dongvat.filter(
 //   (item, index) => item.ten === "Con meo" || item.ten === "Con bo"
@@ -139,36 +144,59 @@
 // console.group(ketqua4);
 
 //Bài Tập
-const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
-document.querySelector("#form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const useInput = document.querySelector("#input").value;
-  const lists = [
-    {
-      id: 1,
-      name: useInput,
-      status: false,
-    },
-  ];
-  const list = lists.map((item, index) => {
-    return {
-      name: item.name,
-    };
-  });
-  accounts.push(list);
-  localStorage.setItem("accounts", JSON.stringify(accounts));
-  let Div = document.querySelector("#Div");
-  Div.innerHTML = "Xin Chào " + useInput;
-});
-
-// const list = {
-//   id: 1,
-//   name: useInput,
-//   status: false,
-// };
-// accounts.push(list);
-// console.log(accounts);
-// localStorage.setItem("accounts", JSON.stringify(accounts));
-// accounts.forEach((item, index) => {
-//   console.log(item, index);
+// const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+// document.querySelector("#form").addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   const useInput = document.querySelector("#input").value;
+//   const lists = {
+//     id: 1,
+//     name: useInput,
+//     status: false,
+//   };
+//   console.log(lists);
+//   const list = lists.map((item, index) => {
+//     return {
+//       name: item.name,
+//     };
+//   });
+//   accounts.push(list);
+//   localStorage.setItem("accounts", JSON.stringify(accounts));
+//   let Div = document.querySelector("#Div");
+//   Div.innerHTML = "Xin Chào " + useInput;
 // });
+
+//------------------
+document.querySelector("#form"),
+  addEventListener("submit", (e) => {
+    e.preventDefault();
+    const accounts = JSON.parse(localStorage.getItem("lists")) || [];
+    const username = document.querySelector("input").value;
+    let lists = [
+      {
+        id: 1,
+        name: username,
+        status: false,
+      },
+    ];
+    let list = lists.map((item, index) => {
+      return { name: item.name };
+    });
+    accounts.push(list);
+    localStorage.setItem("lists", JSON.stringify(accounts));
+    // });
+    let ElementDiv = document.createElement("li");
+    console.log(ElementDiv);
+    let button = document.createElement("button");
+    button.innerText = "Xoá";
+    button.style = "margin-top:10px;";
+    ElementDiv.innerHTML = username;
+    ElementDiv.style = " margin-right:20px;color:red;margin-top:10px";
+    document.body.appendChild(ElementDiv);
+    document.body.appendChild(button);
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      ElementDiv.style = "disPlay:none";
+      button.style = "disPlay:none";
+      localStorage.removeItem("lists");
+    });
+  });
